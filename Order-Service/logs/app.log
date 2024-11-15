@@ -108,3 +108,106 @@ Action:
 
 Consider renaming one of the beans or enabling overriding by setting spring.main.allow-bean-definition-overriding=true
 
+2024-11-15T11:35:18.546+05:30  INFO 16788 --- [Order-Service] [restartedMain] c.e.order.OrderServiceApplication        : Starting OrderServiceApplication using Java 21.0.5 with PID 16788 (C:\Users\ddadasop\eclipse-workspace\Shopping-Cart\Order-Service\target\classes started by ddadasop in C:\Users\ddadasop\eclipse-workspace\Shopping-Cart\Order-Service)
+2024-11-15T11:35:18.556+05:30  INFO 16788 --- [Order-Service] [restartedMain] c.e.order.OrderServiceApplication        : No active profile set, falling back to 1 default profile: "default"
+2024-11-15T11:35:18.847+05:30  INFO 16788 --- [Order-Service] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-11-15T11:35:18.848+05:30  INFO 16788 --- [Order-Service] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-11-15T11:35:21.813+05:30  WARN 16788 --- [Order-Service] [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.support.BeanDefinitionOverrideException: Invalid bean definition with name 'customAPI' defined in class path resource [com/eshopping/profile/config/OpenApiProfileConfig.class]: Cannot register bean definition [Root bean: class [null]; scope=; abstract=false; lazyInit=null; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=openApiProfileConfig; factoryMethodName=customAPI; initMethodNames=null; destroyMethodNames=[(inferred)]; defined in class path resource [com/eshopping/profile/config/OpenApiProfileConfig.class]] for bean 'customAPI' since there is already [Root bean: class [null]; scope=; abstract=false; lazyInit=null; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=openApiProductConfig; factoryMethodName=customAPI; initMethodNames=null; destroyMethodNames=[(inferred)]; defined in class path resource [com/eshopping/order/config/OpenApiProductConfig.class]] bound.
+2024-11-15T11:35:21.846+05:30  INFO 16788 --- [Order-Service] [restartedMain] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2024-11-15T11:35:21.979+05:30 ERROR 16788 --- [Order-Service] [restartedMain] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+The bean 'customAPI', defined in class path resource [com/eshopping/profile/config/OpenApiProfileConfig.class], could not be registered. A bean with that name has already been defined in class path resource [com/eshopping/order/config/OpenApiProductConfig.class] and overriding is disabled.
+
+Action:
+
+Consider renaming one of the beans or enabling overriding by setting spring.main.allow-bean-definition-overriding=true
+
+2024-11-15T11:37:47.951+05:30  INFO 14704 --- [Order-Service] [restartedMain] c.e.order.OrderServiceApplication        : Starting OrderServiceApplication using Java 21.0.5 with PID 14704 (C:\Users\ddadasop\eclipse-workspace\Shopping-Cart\Order-Service\target\classes started by ddadasop in C:\Users\ddadasop\eclipse-workspace\Shopping-Cart\Order-Service)
+2024-11-15T11:37:47.958+05:30  INFO 14704 --- [Order-Service] [restartedMain] c.e.order.OrderServiceApplication        : No active profile set, falling back to 1 default profile: "default"
+2024-11-15T11:37:48.121+05:30  INFO 14704 --- [Order-Service] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-11-15T11:37:48.122+05:30  INFO 14704 --- [Order-Service] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-11-15T11:37:50.376+05:30  WARN 14704 --- [Order-Service] [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.support.BeanDefinitionOverrideException: Invalid bean definition with name 'customAPI' defined in class path resource [com/eshopping/profile/config/OpenApiProfileConfig.class]: Cannot register bean definition [Root bean: class [null]; scope=; abstract=false; lazyInit=null; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=openApiProfileConfig; factoryMethodName=customAPI; initMethodNames=null; destroyMethodNames=[(inferred)]; defined in class path resource [com/eshopping/profile/config/OpenApiProfileConfig.class]] for bean 'customAPI' since there is already [Root bean: class [null]; scope=; abstract=false; lazyInit=null; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=openApiProductConfig; factoryMethodName=customAPI; initMethodNames=null; destroyMethodNames=[(inferred)]; defined in class path resource [com/eshopping/order/config/OpenApiProductConfig.class]] bound.
+2024-11-15T11:37:50.398+05:30  INFO 14704 --- [Order-Service] [restartedMain] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2024-11-15T11:37:50.469+05:30 ERROR 14704 --- [Order-Service] [restartedMain] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+The bean 'customAPI', defined in class path resource [com/eshopping/profile/config/OpenApiProfileConfig.class], could not be registered. A bean with that name has already been defined in class path resource [com/eshopping/order/config/OpenApiProductConfig.class] and overriding is disabled.
+
+Action:
+
+Consider renaming one of the beans or enabling overriding by setting spring.main.allow-bean-definition-overriding=true
+
+2024-11-15T11:39:24.615+05:30  INFO 12244 --- [Order-Service] [restartedMain] c.e.order.OrderServiceApplication        : Starting OrderServiceApplication using Java 21.0.5 with PID 12244 (C:\Users\ddadasop\eclipse-workspace\Shopping-Cart\Order-Service\target\classes started by ddadasop in C:\Users\ddadasop\eclipse-workspace\Shopping-Cart\Order-Service)
+2024-11-15T11:39:24.626+05:30  INFO 12244 --- [Order-Service] [restartedMain] c.e.order.OrderServiceApplication        : No active profile set, falling back to 1 default profile: "default"
+2024-11-15T11:39:24.910+05:30  INFO 12244 --- [Order-Service] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-11-15T11:39:24.911+05:30  INFO 12244 --- [Order-Service] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-11-15T11:39:28.489+05:30  INFO 12244 --- [Order-Service] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-11-15T11:39:29.106+05:30  INFO 12244 --- [Order-Service] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 580 ms. Found 1 JPA repository interface.
+2024-11-15T11:39:29.119+05:30  INFO 12244 --- [Order-Service] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-11-15T11:39:29.186+05:30  INFO 12244 --- [Order-Service] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 65 ms. Found 1 JPA repository interface.
+2024-11-15T11:39:31.418+05:30  INFO 12244 --- [Order-Service] [restartedMain] o.s.cloud.context.scope.GenericScope     : BeanFactory id=4e7941f1-f6a3-3fc2-bdbc-fa4aa052d7b1
+2024-11-15T11:39:32.128+05:30  WARN 12244 --- [Order-Service] [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2024-11-15T11:39:32.139+05:30  WARN 12244 --- [Order-Service] [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected/applied to a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies/advisors. If this bean does not have to be post-processed, declare it with ROLE_INFRASTRUCTURE.
+2024-11-15T11:39:33.665+05:30  INFO 12244 --- [Order-Service] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8094 (http)
+2024-11-15T11:39:33.719+05:30  INFO 12244 --- [Order-Service] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-11-15T11:39:33.720+05:30  INFO 12244 --- [Order-Service] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.31]
+2024-11-15T11:39:33.957+05:30  INFO 12244 --- [Order-Service] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-11-15T11:39:33.959+05:30  INFO 12244 --- [Order-Service] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 9044 ms
+2024-11-15T11:39:34.777+05:30  INFO 12244 --- [Order-Service] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-11-15T11:39:35.004+05:30  INFO 12244 --- [Order-Service] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
+2024-11-15T11:39:35.114+05:30  INFO 12244 --- [Order-Service] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-11-15T11:39:36.143+05:30  INFO 12244 --- [Order-Service] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-11-15T11:39:36.286+05:30  INFO 12244 --- [Order-Service] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-11-15T11:39:36.801+05:30  INFO 12244 --- [Order-Service] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@72ad599a
+2024-11-15T11:39:36.807+05:30  INFO 12244 --- [Order-Service] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-11-15T11:39:36.942+05:30  WARN 12244 --- [Order-Service] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-11-15T11:39:36.946+05:30  WARN 12244 --- [Order-Service] [restartedMain] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2024-11-15T11:39:40.514+05:30  INFO 12244 --- [Order-Service] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-11-15T11:39:40.919+05:30  INFO 12244 --- [Order-Service] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-11-15T11:39:42.938+05:30  WARN 12244 --- [Order-Service] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-11-15T11:39:44.203+05:30  WARN 12244 --- [Order-Service] [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'openAPIBuilder' defined in class path resource [org/springdoc/core/configuration/SpringDocConfiguration.class]: Unsatisfied dependency expressed through method 'openAPIBuilder' parameter 0: No qualifying bean of type 'io.swagger.v3.oas.models.OpenAPI' available: expected single matching bean but found 2: customAPI,customOrderAPI
+2024-11-15T11:39:44.208+05:30  INFO 12244 --- [Order-Service] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-11-15T11:39:44.217+05:30  INFO 12244 --- [Order-Service] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-11-15T11:39:44.242+05:30  INFO 12244 --- [Order-Service] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-11-15T11:39:44.250+05:30  INFO 12244 --- [Order-Service] [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2024-11-15T11:39:44.295+05:30  INFO 12244 --- [Order-Service] [restartedMain] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2024-11-15T11:39:44.398+05:30 ERROR 12244 --- [Order-Service] [restartedMain] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Parameter 0 of method openAPIBuilder in org.springdoc.core.configuration.SpringDocConfiguration required a single bean, but 2 were found:
+	- customAPI: defined by method 'customAPI' in class path resource [com/eshopping/order/config/OpenApiProductConfig.class]
+	- customOrderAPI: defined by method 'customOrderAPI' in class path resource [com/eshopping/profile/config/OpenApiProfileConfig.class]
+
+This may be due to missing parameter name information
+
+Action:
+
+Consider marking one of the beans as @Primary, updating the consumer to accept multiple beans, or using @Qualifier to identify the bean that should be consumed
+
+Ensure that your compiler is configured to use the '-parameters' flag.
+You may need to update both your build tool settings as well as your IDE.
+(See https://github.com/spring-projects/spring-framework/wiki/Upgrading-to-Spring-Framework-6.x#parameter-name-retention)
+
+

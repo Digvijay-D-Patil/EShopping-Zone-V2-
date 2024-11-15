@@ -10,7 +10,7 @@ import io.swagger.v3.oas.models.info.Info;
 public class OpenApiProfileConfig {
 
 	@Bean
-	public OpenAPI customAPI() {
+	public OpenAPI customOrderAPI() {
 		Info info = new Info();
 		info.setTitle("EShopping Zone - Cart");
 		info.setVersion("1.0");

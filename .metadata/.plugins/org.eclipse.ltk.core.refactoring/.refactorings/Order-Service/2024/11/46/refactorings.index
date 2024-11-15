@@ -3,3 +3,5 @@
 1731512143473	Move 'Profile-Service-0.0.1-SNAPSHOT.jar' to 'custom-jar'
 1731512690238	Delete elements
 1731563186182	Extract local variable 'byId'
+1731651520827	Rename type 'OpenApiProductConfig'
+1731651531823	Rename type 'OpenApiOrdercConfig'

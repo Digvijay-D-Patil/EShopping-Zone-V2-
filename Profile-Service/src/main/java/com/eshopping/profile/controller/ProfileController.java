@@ -16,7 +16,6 @@ import com.eshopping.profile.entity.UserProfile;
 import com.eshopping.profile.service.UserService;
 
 import io.swagger.v3.oas.annotations.Operation;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -28,7 +27,7 @@ public class ProfileController {
 
 	@Operation(summary = "Add a new user profile")
 	@PostMapping
-	public ResponseEntity<UserProfileDTO> addUserProfile(@Valid @RequestBody UserProfile userProfile) {
+	public ResponseEntity<UserProfileDTO> addUserProfile(@RequestBody UserProfile userProfile) {
 		UserProfileDTO userProfileDTO = UserProfileConverter.entityToDTO(userProfile); // Convert entity to DTO
 		UserProfileDTO createdProfile = userService.addUserProfile(userProfileDTO);
 		return ResponseEntity.ok(createdProfile);
