@@ -1,0 +1,55 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: API-GATEWAY
+  
+  cloud:
+    gateway:
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+      routes:
+        - id: Profile-Service
+          uri: lb://Profile-Service
+          predicates:
+            - Path=/api/users/**
+        - id: Product-Service
+          uri: lb://Product-Service
+          predicates:
+            - Path=/products/**
+        - id: Cart-Service
+          uri: lb://Cart-Service
+          predicates:
+            - Path=/api/carts/**
+				- id: Wallet-Service
+				  uri: lb://Wallet-Service
+					predicates:
+				    - Path=/api/wallets/**
+				- id: Order-Service
+				  uri: lb://Order-Service
+				  predicates:
+				    - Path=/api/wallets/**
+
+          
+  config:
+    import: optional:configserver:http://localhost:8085
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+
+  main:
+    web-application-type: reactive

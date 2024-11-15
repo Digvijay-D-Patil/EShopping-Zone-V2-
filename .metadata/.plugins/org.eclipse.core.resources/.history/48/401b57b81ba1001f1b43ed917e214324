@@ -1,0 +1,51 @@
+package com.cg.controller;
+
+
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.cg.entity.EWallet;
+import com.cg.entity.Statement;
+import com.cg.service.EWalletService;
+
+@RestController
+@RequestMapping("/api/wallets")
+public class EWalletController {
+
+	@Autowired
+	private EWalletService walletService;
+
+	@PostMapping
+	public EWallet addWallet(@RequestBody EWallet wallet) {
+		return walletService.addWallet(wallet);
+	}
+
+	@GetMapping("/{walletId}")
+	public EWallet getWalletById(@PathVariable Long walletId) {
+		return walletService.getWalletById(walletId);
+	}
+
+	@PostMapping("/{walletId}/statements")
+	public void addStatement(@PathVariable Long walletId, @RequestBody Statement statement) {
+		walletService.addStatement(walletId, statement);
+	}
+
+	@GetMapping("/{walletId}/statements")
+	public List<Statement> getStatementsByWalletId(@PathVariable Long walletId) {
+		return walletService.getStatementsByWalletId(walletId);
+	}
+
+	@DeleteMapping("/{walletId}")
+	public void deleteWallet(@PathVariable Long walletId) {
+		walletService.deleteWalletById(walletId);
+	}
+}

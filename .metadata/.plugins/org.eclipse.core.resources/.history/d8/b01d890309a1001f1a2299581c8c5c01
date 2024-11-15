@@ -1,0 +1,52 @@
+package com.cg.entity;
+
+import jakarta.persistence.*;
+import java.util.List;
+
+@Entity
+public class Cart {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int cartId;
+    
+    private double totalPrice;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "cart_id") // Foreign key column in Items table
+    private List<Items> items;
+
+    // Constructors, Getters, and Setters
+    public Cart() {}
+
+    public Cart(int cartId, List<Items> items) {
+        this.cartId = cartId;
+        this.items = items;
+        this.totalPrice = calculateTotalPrice();
+    }
+
+    public int getCartId() {
+        return cartId;
+    }
+
+    public void setCartId(int cartId) {
+        this.cartId = cartId;
+    }
+
+    public List<Items> getItems() {
+        return items;
+    }
+
+    public void setItems(List<Items> items) {
+        this.items = items;
+        this.totalPrice = calculateTotalPrice();
+    }
+
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    private double calculateTotalPrice() {
+        return items.stream().mapToDouble(item -> item.getPrice() * item.getQuantity()).sum();
+    }
+}

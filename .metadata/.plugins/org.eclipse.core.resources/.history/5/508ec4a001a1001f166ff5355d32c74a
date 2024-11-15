@@ -1,0 +1,6 @@
+package com.cg.repository;
+@Repository
+public interface ProfileRepository extends JpaRepository<UserProfile, Long> {
+    Optional<UserProfile> findByMobileNumber(String mobileNumber);
+    Optional<UserProfile> findByFirstNameAndLastName(String firstName, String lastName);
+}

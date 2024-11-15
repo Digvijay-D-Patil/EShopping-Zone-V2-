@@ -1,0 +1,8 @@
+package com.cg.service;
+public interface UserService {
+    UserProfile addUserProfile(UserProfile userProfile);
+    UserProfile getUserProfile(Long profileId);
+    UserProfile getUserProfileByMobile(String mobileNumber);
+    UserProfile getUserProfileByName(String firstName, String lastName);
+    void deleteUserProfile(Long profileId);
+}

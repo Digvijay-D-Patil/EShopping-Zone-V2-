@@ -1,0 +1,74 @@
+package com.eshopping.product.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.eshopping.product.entity.Product;
+import com.eshopping.product.exception.ProductNotFoundException;
+import com.eshopping.product.repository.ProductRepository;
+
+@Service
+public class ProductServiceImpl implements ProductService {
+
+	@Autowired
+	private ProductRepository productRepository;
+
+	@Override
+	public void addProducts(Product product) {
+		productRepository.save(product);
+	}
+
+	@Override
+	public List<Product> getAllProducts() {
+		return productRepository.findAll();
+	}
+
+	@Override
+	public Optional<Product> getProductById(int id) {
+		return productRepository.findById(id)
+				.orElseThrow(() -> new ProductNotFoundException("Product with ID " + id + " not found"));
+	}
+
+	@Override
+	public Optional<Product> getProductByName(String productName) {
+		return productRepository.findByProductName(productName)
+				.orElseThrow(() -> new ProductNotFoundException("Product with name " + productName + " not found"));
+	}
+
+	@Override
+	public Product updateProducts(Product product) {
+		if (!productRepository.existsById(product.getId())) {
+			throw new ProductNotFoundException("Product with ID " + product.getId() + " not found");
+		}
+		return productRepository.save(product);
+	}
+
+	@Override
+	public void deleteProductById(int id) {
+		if (!productRepository.existsById(id)) {
+			throw new ProductNotFoundException("Product with ID " + id + " not found");
+		}
+		productRepository.deleteById(id);
+	}
+
+	@Override
+	public List<Product> getProductByCategory(String category) {
+		List<Product> products = productRepository.findByCategory(category);
+		if (products.isEmpty()) {
+			throw new ProductNotFoundException("No products found in category " + category);
+		}
+		return products;
+	}
+
+	@Override
+	public List<Product> getProductByType(String productType) {
+		List<Product> products = productRepository.findByProductType(productType);
+		if (products.isEmpty()) {
+			throw new ProductNotFoundException("No products found of type " + productType);
+		}
+		return products;
+	}
+}

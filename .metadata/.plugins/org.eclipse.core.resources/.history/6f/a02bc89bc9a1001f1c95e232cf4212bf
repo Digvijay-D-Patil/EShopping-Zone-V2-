@@ -1,0 +1,16 @@
+package com.eshopping.order.service;
+
+import com.cg.order.orderservice.orders.Orders;
+import com.cg.order.orderservice.cart.Cart;
+import com.cg.order.orderservice.address.Address;
+import java.util.List;
+import java.util.Optional;
+
+public interface OrderService {
+    Orders placeOrder(Cart cart, int customerId, Address address);
+    List<Orders> getAllOrders();
+    List<Orders> getOrderByCustomerId(int customerId);
+    Optional<Orders> getOrderById(int orderId);
+    void cancelOrder(int orderId);
+    // Define other order-related methods
+}

@@ -1,0 +1,67 @@
+package com.eshopping.wallet.converter;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import com.eshopping.wallet.dto.EWalletDTO;
+import com.eshopping.wallet.dto.StatementDTO;
+import com.eshopping.wallet.entity.EWallet;
+import com.eshopping.wallet.entity.Statement;
+
+public class EWalletConverter {
+
+    // Converts EWallet entity to EWalletDTO
+    public static EWalletDTO entityToDTO(EWallet eWallet) {
+        EWalletDTO eWalletDTO = new EWalletDTO();
+        eWalletDTO.setWalletId(eWallet.getWalletId());
+        eWalletDTO.setBalance(eWallet.getBalance());
+        
+        // Convert list of Statement entities to list of StatementDTOs
+        List<StatementDTO> statementDTOs = eWallet.getStatements().stream()
+                .map(EWalletConverter::statementEntityToDTO)
+                .collect(Collectors.toList());
+        
+        eWalletDTO.setStatements(statementDTOs);
+        return eWalletDTO;
+    }
+
+    // Converts EWalletDTO to EWallet entity
+    public static EWallet dtoToEntity(EWalletDTO eWalletDTO) {
+        EWallet eWallet = new EWallet();
+        eWallet.setWalletId(eWalletDTO.getWalletId());
+        eWallet.setBalance(eWalletDTO.getBalance());
+        
+        // Convert list of StatementDTOs to list of Statement entities
+        List<Statement> statements = eWalletDTO.getStatements().stream()
+                .map(EWalletConverter::statementDtoToEntity)
+                .collect(Collectors.toList());
+        
+        // Set the wallet reference in each Statement entity
+        statements.forEach(statement -> statement.setWallet(eWallet));
+        eWallet.setStatements(statements);
+        
+        return eWallet;
+    }
+
+    // Converts Statement entity to StatementDTO
+    private static StatementDTO statementEntityToDTO(Statement statement) {
+        StatementDTO statementDTO = new StatementDTO();
+        statementDTO.setStatementId(statement.getStatementId());
+        statementDTO.setTransactionType(statement.getTransactionType());
+        statementDTO.setAmount(statement.getAmount());
+        statementDTO.setDateTime(statement.getDateTime());
+        statementDTO.setRemarks(statement.getRemarks());
+        return statementDTO;
+    }
+
+    // Converts StatementDTO to Statement entity
+    private static Statement statementDtoToEntity(StatementDTO statementDTO) {
+        Statement statement = new Statement();
+        statement.setStatementId(statementDTO.getStatementId());
+        statement.setTransactionType(statementDTO.getTransactionType());
+        statement.setAmount(statementDTO.getAmount());
+        statement.setDateTime(statementDTO.getDateTime());
+        statement.setRemarks(statementDTO.getRemarks());
+        return statement;
+    }
+}

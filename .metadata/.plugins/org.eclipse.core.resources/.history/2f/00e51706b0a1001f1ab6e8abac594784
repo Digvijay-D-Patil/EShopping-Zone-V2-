@@ -1,0 +1,49 @@
+package com.eshopping.cart.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.eshopping.cart.dto.CartDTO;
+import com.eshopping.cart.entity.Cart;
+import com.eshopping.cart.exception.CartNotFoundException;
+import com.eshopping.cart.repository.CartRepository;
+
+@Service
+public class CartServiceImpl implements CartService {
+
+	private final CartRepository cartRepository;
+
+	@Autowired
+	public CartServiceImpl(CartRepository cartRepository) {
+		this.cartRepository = cartRepository;
+	}
+
+	@Override
+	public CartDTO getCartById(int cartId) {
+		return cartRepository.findByCartId(cartId)
+				.orElseThrow(() -> new CartNotFoundException("Cart not found with ID: " + cartId));
+	}
+
+	@Override
+	public List<CartDTO> getAllCarts() {
+		return cartRepository.findAll();
+	}
+
+	@Override
+	public CartDTO addCart(CartDTO cart) {
+		return cartRepository.save(cart);
+	}
+
+	@Override
+	public CartDTO updateCart(CartDTO cart) {
+		return cartRepository.save(cart);
+	}
+
+	@Override
+	public double getCartTotal(int cartId) {
+		CartDTO cart = getCartById(cartId);
+		return cart.getTotalPrice();
+	}
+}

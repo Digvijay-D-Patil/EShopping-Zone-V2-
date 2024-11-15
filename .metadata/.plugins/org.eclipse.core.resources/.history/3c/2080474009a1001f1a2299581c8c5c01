@@ -1,0 +1,12 @@
+package com.cg.service;
+
+import com.capgemini.cartservice.entity.Cart;
+import java.util.List;
+
+public interface CartService {
+    Cart getCartById(int cartId);
+    List<Cart> getAllCarts();
+    Cart addCart(Cart cart);
+    Cart updateCart(Cart cart);
+    double getCartTotal(int cartId);
+}

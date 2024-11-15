@@ -1,0 +1,45 @@
+package com.cg.service;
+
+import com.capgemini.cartservice.entity.Cart;
+import com.capgemini.cartservice.repository.CartRepository;
+import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
+
+@Service
+public class CartServiceImpl implements CartService {
+
+    private final CartRepository cartRepository;
+
+    @Autowired
+    public CartServiceImpl(CartRepository cartRepository) {
+        this.cartRepository = cartRepository;
+    }
+
+    @Override
+    public Cart getCartById(int cartId) {
+        return cartRepository.findByCartId(cartId).orElse(null);
+    }
+
+    @Override
+    public List<Cart> getAllCarts() {
+        return cartRepository.findAll();
+    }
+
+    @Override
+    public Cart addCart(Cart cart) {
+        return cartRepository.save(cart);
+    }
+
+    @Override
+    public Cart updateCart(Cart cart) {
+        return cartRepository.save(cart);
+    }
+
+    @Override
+    public double getCartTotal(int cartId) {
+        Cart cart = getCartById(cartId);
+        return (cart != null) ? cart.getTotalPrice() : 0;
+    }
+}

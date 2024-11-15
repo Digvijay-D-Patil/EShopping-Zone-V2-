@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.m2e.core.pom.overview">
+	</section>
+	<section name="org.eclipse.m2e.core.pom.dependencies">
+	</section>
+	<section name="MavenProjectImportWizardPage">
+		<list key="rootDirectory">
+			<item value="C:\Users\ddadasop\Desktop\EasyPay-BankApplication\EasyPay-Backend\ServiceRegistry"/>
+			<item value="C:\Users\ddadasop\Desktop\EasyPay-BankApplication\EasyPay-Backend\ApiGateway"/>
+			<item value="C:\Users\ddadasop\Desktop\EShopping-Zone-main\EShopping-Zone-main"/>
+			<item value="C:\Users\ddadasop\Downloads\Online-Shopping-System-main\Online-Shopping-System-main"/>
+			<item value="C:\Users\ddadasop\Downloads\Online-Shopping-Application-main\Online-Shopping-Application-main\Images"/>
+			<item value="C:\Users\ddadasop\Downloads\Shopping-Cart\Shopping-Cart"/>
+		</list>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
+		</list>
+	</section>
+	<section name="org.eclipse.m2e.core.ui.internal.dialogs.MavenRepositorySearchDialog">
+		<item key="width" value="480"/>
+		<item key="height" value="838"/>
+		<item key="x" value="720"/>
+		<item key="y" value="0"/>
+	</section>
+</section>

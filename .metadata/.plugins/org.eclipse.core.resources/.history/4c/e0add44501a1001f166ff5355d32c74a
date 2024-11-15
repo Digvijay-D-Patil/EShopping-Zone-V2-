@@ -1,0 +1,21 @@
+@Entity
+public class UserProfile {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long profileId;
+    private String firstName;
+    private String lastName;
+    private String about;
+    private String gender;
+    private String mobileNumber;
+    private String email;
+    private LocalDate dob;
+    
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Address> addresses;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    // Getters and setters
+}

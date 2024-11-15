@@ -1,0 +1,46 @@
+package com.cg.service;
+
+import org.springframework.stereotype.Service;
+
+import com.cg.entity.UserProfile;
+import com.cg.repository.ProfileRepository;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+public class UserServiceImpl implements UserService {
+
+	private final ProfileRepository profileRepository;
+
+	 @Override
+	    public UserProfile addUserProfile(UserProfile userProfile) {
+	        return profileRepository.save(userProfile);
+	    }
+
+	    @Override
+	    public UserProfile getUserProfile(Long profileId) {
+	        return profileRepository.findById(profileId)
+	                .orElseThrow(() -> new UserProfileNotFoundException("UserProfile not found with ID: " + profileId));
+	    }
+
+	    @Override
+	    public UserProfile getUserProfileByMobile(String mobileNumber) {
+	        return profileRepository.findByMobileNumber(mobileNumber)
+	                .orElseThrow(() -> new UserProfileNotFoundException("UserProfile not found with mobile number: " + mobileNumber));
+	    }
+
+	    @Override
+	    public UserProfile getUserProfileByName(String firstName, String lastName) {
+	        return profileRepository.findByFirstNameAndLastName(firstName, lastName)
+	                .orElseThrow(() -> new UserProfileNotFoundException("UserProfile not found with name: " + firstName + " " + lastName));
+	    }
+
+	    @Override
+	    public void deleteUserProfile(Long profileId) {
+	        if (!profileRepository.existsById(profileId)) {
+	            throw new UserProfileNotFoundException("Cannot delete. UserProfile not found with ID: " + profileId);
+	        }
+	        profileRepository.deleteById(profileId);
+	    }
+}

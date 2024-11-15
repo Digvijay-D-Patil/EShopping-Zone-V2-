@@ -1,0 +1,16 @@
+package com.eshopping.profile.service;
+
+import com.eshopping.profile.dto.UserProfileDTO;
+import com.eshopping.profile.entity.UserProfile;
+
+public interface UserService {
+	UserProfileDTO addUserProfile(UserProfileDTO userProfile);
+
+	UserProfileDTO getUserProfile(Long profileId);
+
+	UserProfileDTO getUserProfileByMobile(String mobileNumber);
+
+	UserProfileDTO getUserProfileByName(String firstName, String lastName);
+
+	void deleteUserProfile(Long profileId);
+}

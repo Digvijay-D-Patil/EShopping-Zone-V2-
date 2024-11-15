@@ -1,0 +1,10 @@
+1730906963919	Rename package 'com.cg'
+1730907001952	Rename package 'com.cg.dao'
+1730907036847	Rename package 'com.cg.service'
+1730907057531	Rename package 'com.cg.entity'
+1730907095127	Rename package 'com.cg.dto'
+1730915023459	Delete element
+1730970162417	Rename package 'com.cg'
+1731058383288	Rename type 'UserProfileUnitTest'
+1731058463287	Rename package 'com.eshopping.profile.UserProfileService'
+1731058506424	Rename package 'com.eshopping.profile.UserProfileService.test'

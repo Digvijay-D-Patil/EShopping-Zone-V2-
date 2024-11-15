@@ -1,0 +1,116 @@
+package com.eshopping.profile.controller;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.time.LocalDate;
+import java.util.Collections;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+
+import com.eshopping.profile.dto.UserProfileDTO;
+import com.eshopping.profile.enumeration.Role;
+import com.eshopping.profile.service.UserService;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+@WebMvcTest(ProfileController.class)
+@AutoConfigureMockMvc
+public class ProfileControllerTest {
+
+	@Autowired
+	private MockMvc mockMvc;
+
+	@Mock
+	private UserService userService;
+
+	@InjectMocks
+	private ProfileController profileController;
+
+	@Autowired
+	private ObjectMapper objectMapper;
+
+	private UserProfileDTO sampleUserProfile;
+
+	@BeforeEach
+	public void setUp() {
+		sampleUserProfile = new UserProfileDTO();
+		sampleUserProfile.setProfileId(1L);
+		sampleUserProfile.setFirstName("John");
+		sampleUserProfile.setLastName("Doe");
+		sampleUserProfile.setAbout("Test user");
+		sampleUserProfile.setGender("Male");
+		sampleUserProfile.setMobileNumber("+1234567890");
+		sampleUserProfile.setEmail("john.doe@example.com");
+		sampleUserProfile.setDob(LocalDate.of(1990, 1, 1));
+		sampleUserProfile.setAddresses(Collections.emptyList());
+		sampleUserProfile.setRole(Role.DELIVERY_AGENT);
+	}
+
+	@Test
+	public void testAddUserProfile() throws Exception {
+		when(userService.addUserProfile(any(UserProfileDTO.class))).thenReturn(sampleUserProfile);
+
+		mockMvc.perform(post("/api/users").contentType(MediaType.APPLICATION_JSON)
+				.content(objectMapper.writeValueAsString(sampleUserProfile))).andExpect(status().isOk())
+				.andExpect(jsonPath("$.profileId").value(sampleUserProfile.getProfileId()))
+				.andExpect(jsonPath("$.firstName").value(sampleUserProfile.getFirstName()))
+				.andExpect(jsonPath("$.lastName").value(sampleUserProfile.getLastName()))
+				.andExpect(jsonPath("$.email").value(sampleUserProfile.getEmail()));
+	}
+
+	@Test
+	public void testGetUserProfileById() throws Exception {
+		when(userService.getUserProfile(1L)).thenReturn(sampleUserProfile);
+
+		mockMvc.perform(get("/api/users/1").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+				.andExpect(jsonPath("$.profileId").value(sampleUserProfile.getProfileId()))
+				.andExpect(jsonPath("$.firstName").value(sampleUserProfile.getFirstName()))
+				.andExpect(jsonPath("$.lastName").value(sampleUserProfile.getLastName()))
+				.andExpect(jsonPath("$.email").value(sampleUserProfile.getEmail()));
+	}
+
+	@Test
+	public void testGetUserProfileByMobile() throws Exception {
+		when(userService.getUserProfileByMobile(eq("+1234567890"))).thenReturn(sampleUserProfile);
+
+		mockMvc.perform(get("/api/users/mobile/+1234567890").contentType(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk()).andExpect(jsonPath("$.profileId").value(sampleUserProfile.getProfileId()))
+				.andExpect(jsonPath("$.firstName").value(sampleUserProfile.getFirstName()))
+				.andExpect(jsonPath("$.lastName").value(sampleUserProfile.getLastName()))
+				.andExpect(jsonPath("$.email").value(sampleUserProfile.getEmail()));
+	}
+
+	@Test
+	public void testGetUserProfileByName() throws Exception {
+		when(userService.getUserProfileByName(eq("John"))).thenReturn(sampleUserProfile);
+
+		mockMvc.perform(get("/api/users/name").param("firstName", "John").contentType(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk()).andExpect(jsonPath("$.profileId").value(sampleUserProfile.getProfileId()))
+				.andExpect(jsonPath("$.firstName").value(sampleUserProfile.getFirstName()))
+				.andExpect(jsonPath("$.lastName").value(sampleUserProfile.getLastName()))
+				.andExpect(jsonPath("$.email").value(sampleUserProfile.getEmail()));
+	}
+
+	@Test
+	public void testDeleteUserProfile() throws Exception {
+		doNothing().when(userService).deleteUserProfile(1L);
+
+		mockMvc.perform(delete("/api/users/1").contentType(MediaType.APPLICATION_JSON))
+				.andExpect(status().isNoContent());
+	}
+}

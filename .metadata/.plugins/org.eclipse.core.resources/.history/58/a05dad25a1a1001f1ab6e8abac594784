@@ -1,0 +1,11 @@
+package com.eshopping.wallet.dto;
+
+import java.util.List;
+import lombok.Data;
+
+@Data
+public class EWalletDTO {
+	private Long walletId;
+	private Double balance;
+	private List<StatementDTO> statements;
+}

@@ -1,0 +1,5 @@
+package com.eshopping.profile.dto;
+
+public class ProfileDTO {
+
+}

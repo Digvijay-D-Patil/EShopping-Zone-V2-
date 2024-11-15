@@ -1,0 +1,38 @@
+package com.og.shoppingZone.productservice.entity;
+
+import java.util.List;
+import java.util.Map;
+
+public class Product {
+    private int productId;
+    private String productType;
+    private String productName;
+    private String category;
+    private Map<Integer, Double> rating;
+    private Map<Integer, String> review;
+    private List<String> image;
+    private double price;
+    private String description;
+    private Map<String, String> specification;
+
+    // Constructors, Getters, and Setters
+
+    public Product() {}
+
+    public Product(int productId, String productType, String productName, String category,
+                   Map<Integer, Double> rating, Map<Integer, String> review, List<String> image,
+                   double price, String description, Map<String, String> specification) {
+        this.productId = productId;
+        this.productType = productType;
+        this.productName = productName;
+        this.category = category;
+        this.rating = rating;
+        this.review = review;
+        this.image = image;
+        this.price = price;
+        this.description = description;
+        this.specification = specification;
+    }
+
+    // Additional Getters and Setters as per diagram
+}

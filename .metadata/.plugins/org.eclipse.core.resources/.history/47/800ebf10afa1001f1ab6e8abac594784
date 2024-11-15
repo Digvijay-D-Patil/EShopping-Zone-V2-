@@ -1,0 +1,78 @@
+package com.eshopping.product.controller;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.eshopping.product.entity.Product;
+import com.eshopping.product.service.ProductService;
+
+import io.swagger.v3.oas.annotations.Operation;
+
+@RestController
+@RequestMapping("/products")
+public class ProductResource {
+
+	@Autowired
+	private ProductService productService;
+
+	@Operation(summary = "Add a new product")
+	@PostMapping
+	public void addProducts(@RequestBody Product product) {
+		productService.addProducts(product);
+	}
+
+	@Operation(summary = "Retrieve all products")
+	@GetMapping
+	public List<Product> getAllProducts() {
+		return productService.getAllProducts();
+	}
+
+	@Operation(summary = "Retrieve a product by its ID")
+	@GetMapping("/{id}")
+	public ResponseEntity<Product> getProductById(@PathVariable int id) {
+		Optional<Product> product = productService.getProductById(id);
+		return product.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+	}
+
+	@Operation(summary = "Retrieve a product by its name")
+	@GetMapping("/name/{productName}")
+	public ResponseEntity<Product> getProductByName(@PathVariable String productName) {
+		Optional<Product> product = productService.getProductByName(productName);
+		return product.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+	}
+
+	@Operation(summary = "Retrieve products by category")
+	@GetMapping("/category/{category}")
+	public List<Product> getProductByCategory(@PathVariable String category) {
+		return productService.getProductByCategory(category);
+	}
+
+	@Operation(summary = "Retrieve products by type")
+	@GetMapping("/type/{productType}")
+	public List<Product> getProductByType(@PathVariable String productType) {
+		return productService.getProductByType(productType);
+	}
+
+	@Operation(summary = "Update an existing product")
+	@PutMapping
+	public Product updateProduct(@RequestBody Product product) {
+		return productService.updateProducts(product);
+	}
+
+	@Operation(summary = "Delete a product by its ID")
+	@DeleteMapping("/{id}")
+	public void deleteProduct(@PathVariable int id) {
+		productService.deleteProductById(id);
+	}
+}

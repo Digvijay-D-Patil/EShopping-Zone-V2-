@@ -1,0 +1,5 @@
+public enum Role {
+    CUSTOMER,
+    SELLER,
+    DELIVERY_AGENT
+}

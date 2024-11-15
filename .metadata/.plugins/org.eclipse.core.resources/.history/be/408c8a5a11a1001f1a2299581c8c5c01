@@ -1,0 +1,17 @@
+package com.cg.order.orderservice.service;
+
+import com.cg.order.orderservice.cart.Cart;
+import com.cg.order.orderservice.orders.Orders;
+import com.cg.order.orderservice.address.Address;
+
+import java.util.List;
+
+public interface OrderService {
+    List<Orders> getAllOrders();
+    Orders placeOrder(Cart cart);
+    void changeOrderStatus(int orderId, String status);
+    void deleteOrder(int orderId);
+    Orders getOrderById(int orderId);
+    List<Address> getAddressByCustomerId(int customerId);
+    Orders getOrderByCustomerId(int customerId);
+}

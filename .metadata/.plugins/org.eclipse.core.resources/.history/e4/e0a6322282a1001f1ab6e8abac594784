@@ -1,0 +1,68 @@
+package com.cg.controller;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.eshopping.product.entity.Product;
+import com.eshopping.product.service.ProductService;
+
+@RestController
+@RequestMapping("/products")
+public class ProductResource {
+
+	@Autowired
+	private ProductService productService;
+
+	@PostMapping
+	public void addProducts(@RequestBody Product product) {
+		productService.addProducts(product);
+	}
+
+	@GetMapping
+	public List<Product> getAllProducts() {
+		return productService.getAllProducts();
+	}
+
+	@GetMapping("/{id}")
+	public ResponseEntity<Product> getProductById(@PathVariable int id) {
+		Optional<Product> product = productService.getProductById(id);
+		return product.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+	}
+
+	@GetMapping("/name/{productName}")
+	public ResponseEntity<Product> getProductByName(@PathVariable String productName) {
+		Optional<Product> product = productService.getProductByName(productName);
+		return product.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+	}
+
+	@GetMapping("/category/{category}")
+	public List<Product> getProductByCategory(@PathVariable String category) {
+		return productService.getProductByCategory(category);
+	}
+
+	@GetMapping("/type/{productType}")
+	public List<Product> getProductByType(@PathVariable String productType) {
+		return productService.getProductByType(productType);
+	}
+
+	@PutMapping
+	public Product updateProduct(@RequestBody Product product) {
+		return productService.updateProducts(product);
+	}
+
+	@DeleteMapping("/{id}")
+	public void deleteProduct(@PathVariable int id) {
+		productService.deleteProductById(id);
+	}
+}

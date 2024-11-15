@@ -1,0 +1,22 @@
+package com.eshopping.order.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.boot.autoconfigure.amqp.RabbitConnectionDetails.Address;
+
+import com.eshopping.cart.entity.Cart;
+import com.eshopping.order.entity.Orders;
+
+public interface OrderService {
+	Orders placeOrder(Cart cart, int customerId, Address address);
+
+	List<Orders> getAllOrders();
+
+	List<Orders> getOrderByCustomerId(int customerId);
+
+	Optional<Orders> getOrderById(int orderId);
+
+	void cancelOrder(int orderId);
+	// Define other order-related methods
+}

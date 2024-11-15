@@ -1,0 +1,7 @@
+package com.example.ewallet.repository;
+
+import com.example.ewallet.model.EWallet;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface EWalletRepository extends JpaRepository<EWallet, Long> {
+}

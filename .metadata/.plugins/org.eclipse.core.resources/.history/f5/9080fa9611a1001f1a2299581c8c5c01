@@ -1,0 +1,54 @@
+package com.cg.controller;
+
+import com.cg.order.orderservice.cart.Cart;
+import com.cg.order.orderservice.orders.Orders;
+import com.cg.order.orderservice.address.Address;
+import com.cg.order.orderservice.service.OrderService;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/orders")
+public class OrderResource {
+
+    @Autowired
+    private OrderService orderService;
+
+    @GetMapping
+    public List<Orders> getAllOrders() {
+        return orderService.getAllOrders();
+    }
+
+    @PostMapping
+    public Orders placeOrder(@RequestBody Cart cart) {
+        return orderService.placeOrder(cart);
+    }
+
+    @PutMapping("/{orderId}/status")
+    public void changeOrderStatus(@PathVariable int orderId, @RequestBody String status) {
+        orderService.changeOrderStatus(orderId, status);
+    }
+
+    @DeleteMapping("/{orderId}")
+    public void deleteOrder(@PathVariable int orderId) {
+        orderService.deleteOrder(orderId);
+    }
+
+    @GetMapping("/{orderId}")
+    public Orders getOrderById(@PathVariable int orderId) {
+        return orderService.getOrderById(orderId);
+    }
+
+    @GetMapping("/customer/{customerId}/address")
+    public List<Address> getAddressByCustomerId(@PathVariable int customerId) {
+        return orderService.getAddressByCustomerId(customerId);
+    }
+
+    @GetMapping("/customer/{customerId}")
+    public Orders getOrderByCustomerId(@PathVariable int customerId) {
+        return orderService.getOrderByCustomerId(customerId);
+    }
+}

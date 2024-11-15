@@ -1,0 +1,17 @@
+package com.eshopping.cart.service;
+
+import java.util.List;
+
+import com.eshopping.cart.entity.Cart;
+
+public interface CartService {
+	Cart getCartById(int cartId);
+
+	List<Cart> getAllCarts();
+
+	Cart addCart(Cart cart);
+
+	Cart updateCart(Cart cart);
+
+	double getCartTotal(int cartId);
+}

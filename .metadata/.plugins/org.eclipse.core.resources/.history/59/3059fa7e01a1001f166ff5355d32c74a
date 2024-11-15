@@ -1,0 +1,6 @@
+package com.cg.enumeration;
+public enum Role {
+    CUSTOMER,
+    SELLER,
+    DELIVERY_AGENT
+}

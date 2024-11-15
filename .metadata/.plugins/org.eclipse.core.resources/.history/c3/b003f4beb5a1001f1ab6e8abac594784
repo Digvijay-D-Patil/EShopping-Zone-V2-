@@ -1,0 +1,57 @@
+package com.eshopping.wallet.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.eshopping.wallet.dto.EWalletDTO;
+import com.eshopping.wallet.dto.StatementDTO;
+import com.eshopping.wallet.entity.EWallet;
+import com.eshopping.wallet.exception.WalletNotFoundException;
+import com.eshopping.wallet.repository.EWalletRepository;
+import com.eshopping.wallet.repository.StatementRepository;
+
+@Service
+public class EWalletServiceImpl implements EWalletService {
+
+	@Autowired
+	private EWalletRepository walletRepository;
+
+	@Autowired
+	private StatementRepository statementRepository;
+
+	@Override
+	public EWalletDTO addWallet(EWalletDTO wallet) {
+		return walletRepository.save(wallet);
+	}
+
+	@Override
+	public EWalletDTO getWalletById(Long walletId) {
+		return walletRepository.findById(walletId)
+				.orElseThrow(() -> new WalletNotFoundException("Wallet with ID " + walletId + " not found"));
+	}
+
+	@Override
+	public void addStatement(Long walletId, StatementDTO statement) {
+		EWallet wallet = getWalletById(walletId); // This will throw WalletNotFoundException if wallet is not found
+		wallet.addStatement(statement);
+		walletRepository.save(wallet);
+	}
+
+	@Override
+	public List<StatementDTO> getStatementsByWalletId(Long walletId) {
+		if (!walletRepository.existsById(walletId)) {
+			throw new WalletNotFoundException("Wallet with ID " + walletId + " not found");
+		}
+		return statementRepository.findByWallet_WalletId(walletId);
+	}
+
+	@Override
+	public void deleteWalletById(Long walletId) {
+		if (!walletRepository.existsById(walletId)) {
+			throw new WalletNotFoundException("Wallet with ID " + walletId + " not found");
+		}
+		walletRepository.deleteById(walletId);
+	}
+}

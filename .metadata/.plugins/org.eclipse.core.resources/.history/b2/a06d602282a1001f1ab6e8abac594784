@@ -1,0 +1,57 @@
+package com.cg.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.eshopping.product.entity.Product;
+import com.eshopping.product.repository.ProductRepository;
+
+@Service
+public class ProductServiceImpl implements ProductService {
+
+	@Autowired
+	private ProductRepository productRepository;
+
+	@Override
+	public void addProducts(Product product) {
+		productRepository.save(product);
+	}
+
+	@Override
+	public List<Product> getAllProducts() {
+		return productRepository.findAll();
+	}
+
+	@Override
+	public Optional<Product> getProductById(int id) {
+		return productRepository.findById(id);
+	}
+
+	@Override
+	public Optional<Product> getProductByName(String productName) {
+		return productRepository.findByProductName(productName);
+	}
+
+	@Override
+	public Product updateProducts(Product product) {
+		return productRepository.save(product);
+	}
+
+	@Override
+	public void deleteProductById(int id) {
+		productRepository.deleteById(id);
+	}
+
+	@Override
+	public List<Product> getProductByCategory(String category) {
+		return productRepository.findByCategory(category);
+	}
+
+	@Override
+	public List<Product> getProductByType(String productType) {
+		return productRepository.findByProductType(productType);
+	}
+}

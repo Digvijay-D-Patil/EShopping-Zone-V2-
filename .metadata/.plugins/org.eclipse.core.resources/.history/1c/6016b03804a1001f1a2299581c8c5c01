@@ -1,0 +1,56 @@
+package com.cg.controller;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.cg.entity.UserProfile;
+import com.cg.service.UserService;
+
+@RestController
+@RequestMapping("/api/users")
+public class UserController {
+
+	private final UserService userService;
+
+	public UserController(UserService userService) {
+		this.userService = userService;
+	}
+
+	@PostMapping
+	public ResponseEntity<UserProfile> addUserProfile(@RequestBody UserProfile userProfile) {
+		UserProfile createdProfile = userService.addUserProfile(userProfile);
+		return ResponseEntity.ok(createdProfile);
+	}
+
+	@GetMapping("/{profileId}")
+	public ResponseEntity<UserProfile> getUserProfile(@PathVariable Long profileId) {
+		UserProfile userProfile = userService.getUserProfile(profileId);
+		return ResponseEntity.ok(userProfile);
+	}
+
+	@GetMapping("/mobile/{mobileNumber}")
+	public ResponseEntity<UserProfile> getUserProfileByMobile(@PathVariable String mobileNumber) {
+		UserProfile userProfile = userService.getUserProfileByMobile(mobileNumber);
+		return ResponseEntity.ok(userProfile);
+	}
+
+	@GetMapping("/name")
+	public ResponseEntity<UserProfile> getUserProfileByName(@RequestParam String firstName,
+			@RequestParam String lastName) {
+		UserProfile userProfile = userService.getUserProfileByName(firstName, lastName);
+		return ResponseEntity.ok(userProfile);
+	}
+
+	@DeleteMapping("/{profileId}")
+	public ResponseEntity<Void> deleteUserProfile(@PathVariable Long profileId) {
+		userService.deleteUserProfile(profileId);
+		return ResponseEntity.noContent().build();
+	}
+}

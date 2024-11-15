@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<item key="hasShownOverlayPopupBefore" value="true"/>
+	<item key="replaceBarOpen" value="true"/>
+	<list key="searchhistory">
+		<item value="userService"/>
+		<item value="productService"/>
+		<item value="addressRepository"/>
+		<item value="EShopping"/>
+		<item value="IllegalArgumentException"/>
+		<item value="totalPrice"/>
+		<item value="convertOrderDTOToEntity"/>
+	</list>
+	<list key="replacehistory">
+		<item value="IllegalArgsException"/>
+	</list>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item key="selection" value="productRepository"/>
+		<list key="findhistory">
+			<item value="productRepository"/>
+			<item value="convertDTOToEntity"/>
+			<item value="addresses"/>
+		</list>
+	</section>
+</section>

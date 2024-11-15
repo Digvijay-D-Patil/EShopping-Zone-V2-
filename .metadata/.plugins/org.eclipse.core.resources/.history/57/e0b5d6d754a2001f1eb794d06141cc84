@@ -1,0 +1,22 @@
+package com.eshopping.order.dto;
+
+import java.time.LocalDate;
+
+import com.eshopping.product.dto.ProductDTO;
+import com.eshopping.profile.dto.AddressDTO;
+
+import lombok.Data;
+
+@Data
+public class OrderDTO {
+
+	private int orderId;
+	private LocalDate orderDate;
+	private int customerId;
+	private double amountPaid;
+	private String modeOfPayment;
+	private String orderStatus;
+	private int quantity;
+	private AddressDTO address;
+	private ProductDTO product;
+}

@@ -1,0 +1,96 @@
+package com.eshopping.order.service;
+
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.eshopping.cart.dto.CartDTO;
+import com.eshopping.cart.dto.ItemDTO;
+import com.eshopping.order.converter.OrderMapper;
+import com.eshopping.order.dto.OrderDTO;
+import com.eshopping.order.entity.Orders;
+import com.eshopping.order.repository.OrderRepository;
+import com.eshopping.product.entity.Product;
+import com.eshopping.profile.converter.UserProfileConverter;
+import com.eshopping.profile.dto.UserProfileDTO;
+import com.eshopping.profile.service.UserService;
+
+@Service
+public class OrderServiceImpl implements OrderService {
+
+	@Autowired
+	private OrderRepository orderRepository; // Injected ProductService
+
+	@Autowired
+	private UserService userService; // Injected UserService
+
+	@Override
+	public OrderDTO placeOrder(CartDTO cart, String name) {
+		// Fetch user profile
+		UserProfileDTO userProfileByName = userService.getUserProfileByName(name);
+		if (userProfileByName == null) {
+			throw new RuntimeException("User not found");
+		}
+
+		// Calculate total price and validate products in the cart
+		double totalPrice = 0.0;
+		for (ItemDTO item : cart.getItems()) {
+			Optional<Product> productOpt = Optional.empty();
+			if (productOpt.isPresent()) {
+				Product product = productOpt.get();
+				totalPrice += product.getPrice() * item.getQuantity();
+			} else {
+				throw new RuntimeException("Product not found for ID: " + item.getId());
+			}
+		}
+
+		// Create and save order
+		Orders order = new Orders();
+		order.setCustomerId(userProfileByName.getProfileId().intValue());
+		order.setOrderDate(LocalDate.now());
+		order.setAmountPaid(totalPrice);
+		order.setAddress(UserProfileConverter.addressDTOToEntity(userProfileByName.getAddresses().get(0)));
+		order.setOrderStatus("Pending");
+		orderRepository.save(order);
+
+		return OrderMapper.entityToDTO(order);
+
+	}
+
+	@Override
+	public List<Orders> getAllOrders() {
+		return orderRepository.findAll();
+	}
+
+	@Override
+	public List<Orders> getOrderByCustomerId(int customerId) {
+		return orderRepository.findByCustomerId(customerId);
+	}
+
+	@Override
+	public Optional<OrderDTO> getOrderById(int orderId) {
+		Optional<Orders> byId = orderRepository.findById(orderId);
+
+		OrderDTO entityToDTO = OrderMapper.entityToDTO(byId.get());
+
+		return Optional<entityToDTO>;
+	}
+
+	@Override
+	public void cancelOrder(int orderId) {
+		Optional<Orders> orderOpt = orderRepository.findById(orderId);
+		if (orderOpt.isPresent()) {
+			Orders order = orderOpt.get();
+			order.setOrderStatus("Canceled");
+			orderRepository.save(order);
+		} else {
+			throw new RuntimeException("Order not found");
+		}
+	}
+
+	// Additional methods like changeOrderStatus, updateOrder, etc., can be added
+	// here.
+}

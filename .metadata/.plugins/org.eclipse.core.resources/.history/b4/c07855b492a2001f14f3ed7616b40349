@@ -1,0 +1,14 @@
+package com.eshopping.wallet.dto;
+
+import java.time.LocalDateTime;
+
+import lombok.Data;
+
+@Data
+public class StatementDTO {
+	private Long statementId;
+	private String transactionType;
+	private Double amount;
+	private LocalDateTime dateTime;
+	private String remarks;
+}

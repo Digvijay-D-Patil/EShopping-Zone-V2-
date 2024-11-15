@@ -1,0 +1,60 @@
+package com.cg.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.cg.entity.Cart;
+import com.cg.entity.Orders;
+import com.cg.service.OrderService;
+
+@RestController
+@RequestMapping("/orders")
+public class OrderResource {
+
+	@Autowired
+	private OrderService orderService;
+
+	@GetMapping
+	public List<Orders> getAllOrders() {
+		return orderService.getAllOrders();
+	}
+
+	@PostMapping
+	public Orders placeOrder(@RequestBody Cart cart) {
+		return orderService.placeOrder(cart);
+	}
+
+	@PutMapping("/{orderId}/status")
+	public void changeOrderStatus(@PathVariable int orderId, @RequestBody String status) {
+		orderService.changeOrderStatus(orderId, status);
+	}
+
+	@DeleteMapping("/{orderId}")
+	public void deleteOrder(@PathVariable int orderId) {
+		orderService.deleteOrder(orderId);
+	}
+
+	@GetMapping("/{orderId}")
+	public Orders getOrderById(@PathVariable int orderId) {
+		return orderService.getOrderById(orderId);
+	}
+
+	@GetMapping("/customer/{customerId}/address")
+	public List<Address> getAddressByCustomerId(@PathVariable int customerId) {
+		return orderService.getAddressByCustomerId(customerId);
+	}
+
+	@GetMapping("/customer/{customerId}")
+	public Orders getOrderByCustomerId(@PathVariable int customerId) {
+		return orderService.getOrderByCustomerId(customerId);
+	}
+}

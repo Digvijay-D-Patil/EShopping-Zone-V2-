@@ -1,0 +1,18 @@
+package com.cg.service;
+
+import java.util.List;
+
+import com.eshopping.wallet.entity.EWallet;
+import com.eshopping.wallet.entity.Statement;
+
+public interface EWalletService {
+	EWallet addWallet(EWallet wallet);
+
+	EWallet getWalletById(Long walletId);
+
+	void addStatement(Long walletId, Statement statement);
+
+	List<Statement> getStatementsByWalletId(Long walletId);
+
+	void deleteWalletById(Long walletId);
+}

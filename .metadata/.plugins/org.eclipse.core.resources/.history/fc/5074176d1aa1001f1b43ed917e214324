@@ -1,0 +1,56 @@
+package com.cg.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.cg.entity.EWallet;
+import com.cg.entity.Statement;
+import com.cg.repository.EWalletRepository;
+import com.cg.repository.StatementRepository;
+
+@Service
+public class EWalletServiceImpl implements EWalletService {
+
+	@Autowired
+	private EWalletRepository walletRepository;
+
+	@Autowired
+	private StatementRepository statementRepository;
+
+	@Override
+	public EWallet addWallet(EWallet wallet) {
+		return walletRepository.save(wallet);
+	}
+
+	@Override
+	public EWallet getWalletById(Long walletId) {
+		return walletRepository.findById(walletId).orElse(null);
+	}
+
+	@Override
+	public void addStatement(Long walletId, Statement statement) {
+		EWallet wallet = getWalletById(walletId);
+		if (wallet != null) {
+			wallet.addStatement(statement);
+			walletRepository.save(wallet);
+		}
+	}
+
+	@Override
+	public List<Statement> getStatementsByWalletId(Long walletId) {
+		return statementRepository.findByWallet_WalletId(walletId);
+	}
+
+	@Override
+	public void deleteWalletById(Long walletId) {
+		walletRepository.deleteById(walletId);
+	}
+
+	@Override
+	public void addStatement(Long walletId, Statement statement) {
+		// TODO Auto-generated method stub
+		
+	}
+}

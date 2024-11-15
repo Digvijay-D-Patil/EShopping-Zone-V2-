@@ -1,0 +1,49 @@
+package com.example.ewallet.service;
+
+import com.example.ewallet.model.EWallet;
+import com.example.ewallet.model.Statement;
+import com.example.ewallet.repository.EWalletRepository;
+import com.example.ewallet.repository.StatementRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class EWalletServiceImpl implements EWalletService {
+
+    @Autowired
+    private EWalletRepository walletRepository;
+
+    @Autowired
+    private StatementRepository statementRepository;
+
+    @Override
+    public EWallet addWallet(EWallet wallet) {
+        return walletRepository.save(wallet);
+    }
+
+    @Override
+    public EWallet getWalletById(Long walletId) {
+        return walletRepository.findById(walletId).orElse(null);
+    }
+
+    @Override
+    public void addStatement(Long walletId, Statement statement) {
+        EWallet wallet = getWalletById(walletId);
+        if (wallet != null) {
+            wallet.addStatement(statement);
+            walletRepository.save(wallet);
+        }
+    }
+
+    @Override
+    public List<Statement> getStatementsByWalletId(Long walletId) {
+        return statementRepository.findByWallet_WalletId(walletId);
+    }
+
+    @Override
+    public void deleteWalletById(Long walletId) {
+        walletRepository.deleteById(walletId);
+    }
+}

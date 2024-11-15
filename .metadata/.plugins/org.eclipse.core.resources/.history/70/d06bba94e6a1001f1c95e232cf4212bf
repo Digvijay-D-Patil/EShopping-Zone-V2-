@@ -1,0 +1,47 @@
+// AuthController.java
+package com.eshopping.profile.controller;
+
+import com.eshopping.profile.security.JwtTokenProvider;
+import com.eshopping.profile.service.CustomUserDetailsService;
+import com.eshopping.profile.dto.LoginRequest;
+import com.eshopping.profile.dto.LoginResponse;
+import com.eshopping.profile.dto.RegisterRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api/auth")
+public class AuthController {
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private CustomUserDetailsService userDetailsService;
+
+    @Autowired
+    private JwtTokenProvider tokenProvider;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @PostMapping("/login")
+    public LoginResponse authenticateUser(@RequestBody LoginRequest loginRequest) {
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword())
+        );
+
+        String token = tokenProvider.generateToken(loginRequest.getUsername());
+        return new LoginResponse(token);
+    }
+
+    @PostMapping("/register")
+    public String registerUser(@RequestBody RegisterRequest registerRequest) {
+        // Create and save a new user
+        return "User registered successfully";
+    }
+}

@@ -1,0 +1,57 @@
+package com.eshopping.order.controller;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.amqp.RabbitConnectionDetails.Address;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.eshopping.cart.entity.Cart;
+import com.eshopping.order.dto.OrderDTO;
+import com.eshopping.order.entity.Orders;
+import com.eshopping.order.service.OrderService;
+
+@RestController
+@RequestMapping("/api/orders")
+public class OrderResource {
+
+	@Autowired
+	private OrderService orderService;
+
+	@PostMapping("/placeOrder")
+	public ResponseEntity<OrderDTO> placeOrder(@RequestBody Cart cart, @RequestParam String name,
+			@RequestBody Address address) {
+		Orders order = orderService.placeOrder(cart, name);
+		return ResponseEntity.ok(order);
+	}
+
+	@GetMapping("/getAllOrders")
+	public ResponseEntity<List<OrderDTO>> getAllOrders() {
+		return ResponseEntity.ok(orderService.getAllOrders());
+	}
+
+	@GetMapping("/getOrderByCustomerId/{customerId}")
+	public ResponseEntity<List<OrderDTO>> getOrderByCustomerId(@PathVariable int customerId) {
+		return ResponseEntity.ok(orderService.getOrderByCustomerId(customerId));
+	}
+
+	@GetMapping("/getOrderById/{orderId}")
+	public ResponseEntity<Optional<OrderDTO>> getOrderById(@PathVariable int orderId) {
+		return ResponseEntity.ok(orderService.getOrderById(orderId));
+	}
+
+	@PutMapping("/cancelOrder/{orderId}")
+	public ResponseEntity<String> cancelOrder(@PathVariable int orderId) {
+		orderService.cancelOrder(orderId);
+		return ResponseEntity.ok("Order canceled successfully");
+	}
+}
