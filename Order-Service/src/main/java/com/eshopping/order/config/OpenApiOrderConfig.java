@@ -10,7 +10,7 @@ import io.swagger.v3.oas.models.info.Info;
 public class OpenApiOrderConfig {
 
 	@Bean
-	public OpenAPI customAPI() {
+	public OpenAPI customOrderServiceAPI() {
 		Info info = new Info();
 		info.setTitle("EShopping Zone - Order");
 		info.setVersion("1.0");

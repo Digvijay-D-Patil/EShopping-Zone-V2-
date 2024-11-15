@@ -10,12 +10,16 @@ import com.eshopping.cart.converter.CartConverter;
 import com.eshopping.cart.dto.CartDTO;
 import com.eshopping.cart.entity.Cart;
 import com.eshopping.cart.exception.CartNotFoundException;
+import com.eshopping.cart.feignclient.ProductFeignClient;
 import com.eshopping.cart.repository.CartRepository;
 
 @Service
 public class CartServiceImpl implements CartService {
 
 	private final CartRepository cartRepository;
+
+	@Autowired
+	private ProductFeignClient productFeignClient;
 
 	@Autowired
 	public CartServiceImpl(CartRepository cartRepository) {
@@ -26,12 +30,24 @@ public class CartServiceImpl implements CartService {
 	public CartDTO getCartById(int cartId) {
 		Cart cart = cartRepository.findById(cartId)
 				.orElseThrow(() -> new CartNotFoundException("Cart not found with ID: " + cartId));
+		cart.getItems().forEach(d -> {
+			// d.setProductDTO(productFeignClient.getProductById(d.getProductId()));
+
+		});
 		return CartConverter.entityToDTO(cart);
 	}
 
 	@Override
 	public List<CartDTO> getAllCarts() {
-		return cartRepository.findAll().stream().map(CartConverter::entityToDTO).collect(Collectors.toList());
+		List<CartDTO> getAllCartsObj = cartRepository.findAll().stream().map(CartConverter::entityToDTO)
+				.collect(Collectors.toList());
+		getAllCartsObj.forEach(data -> {
+			data.getItems().forEach(d -> {
+				d.setProductDTO(productFeignClient.getProductById(d.getProductId()));
+			});
+
+		});
+		return getAllCartsObj;
 	}
 
 	@Override

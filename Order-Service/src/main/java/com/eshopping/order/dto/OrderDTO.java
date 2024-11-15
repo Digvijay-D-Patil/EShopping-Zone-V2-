@@ -2,8 +2,8 @@ package com.eshopping.order.dto;
 
 import java.time.LocalDate;
 
-import com.eshopping.product.dto.ProductDTO;
-import com.eshopping.profile.dto.AddressDTO;
+import com.eshopping.cart.dto.CartDTO;
+import com.eshopping.profile.dto.UserProfileDTO;
 
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Min;
@@ -23,7 +23,7 @@ public class OrderDTO {
 	private LocalDate orderDate;
 
 	@Min(value = 1, message = "Customer ID must be a positive integer")
-	private int customerId;
+	private long customerId;
 
 	@DecimalMin(value = "0.0", inclusive = false, message = "Amount paid must be positive")
 	private double amountPaid;
@@ -36,12 +36,19 @@ public class OrderDTO {
 	@Size(min = 3, max = 20, message = "Order status must be between 3 and 20 characters")
 	private String orderStatus;
 
-	@Min(value = 1, message = "Quantity must be at least 1")
-	private int quantity;
+	private CartDTO cartDTO;
 
-	@NotNull(message = "Address cannot be null")
-	private AddressDTO address;
+	private UserProfileDTO profileDTO;
+	/*
+	 * @Min(value = 1, message = "Quantity must be at least 1") private int
+	 * quantity;
+	 */
+	/*
+	 * @NotNull(message = "Address cannot be null") private AddressDTO address;
+	 */
 
-	@NotNull(message = "Product cannot be null")
-	private ProductDTO product;
+	/*
+	 * @NotNull(message = "Product cannot be null") private ProductDTO product;
+	 */
+
 }

@@ -18,4 +18,5 @@ public class CartDTO {
 	@NotNull(message = "Items list cannot be null.")
 	@Size(min = 1, message = "There must be at least one item in the cart.")
 	private List<@NotNull(message = "Item cannot be null.") ItemDTO> items;
+
 }

@@ -12,4 +12,5 @@ public interface UserService {
 	UserProfileDTO getUserProfileByName(String firstName);
 
 	void deleteUserProfile(Long profileId);
+
 }

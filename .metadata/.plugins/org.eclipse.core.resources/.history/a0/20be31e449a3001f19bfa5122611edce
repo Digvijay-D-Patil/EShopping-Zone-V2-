@@ -1,0 +1,8 @@
+package com.eshopping.cart.feignclient;
+
+import org.springframework.cloud.openfeign.FeignClient;
+
+@FeignClient(name = "ProductFeignClient", url = "http://localhost:8092/api/products")
+public interface ProductFeignClient {
+
+}

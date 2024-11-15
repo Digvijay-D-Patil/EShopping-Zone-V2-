@@ -7,7 +7,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.eshopping.cart.dto.CartDTO;
 import com.eshopping.cart.dto.ItemDTO;
 import com.eshopping.order.converter.OrderMapper;
 import com.eshopping.order.dto.OrderDTO;
@@ -29,16 +28,16 @@ public class OrderServiceImpl implements OrderService {
 	private UserService userService;
 
 	@Override
-	public OrderDTO placeOrder(CartDTO cart, String name) {
+	public OrderDTO placeOrder(OrderDTO orderDTO, String name) {
 		// Fetch user profile
-		UserProfileDTO userProfileByName = userService.getUserProfileByName(name);
+		UserProfileDTO userProfileByName = userService.getUserProfile(orderDTO.getCustomerId());
 		if (userProfileByName == null) {
 			throw new OrderNotFoundException("User not found");
 		}
 
 		// Calculate total price and validate products in the cart
 		double totalPrice = 0.0;
-		for (ItemDTO item : cart.getItems()) {
+		for (ItemDTO item : orderDTO.getCartDTO().getItems()) {
 			Optional<Product> productOpt = Optional.empty();
 			if (productOpt.isPresent()) {
 				Product product = productOpt.get();
@@ -50,10 +49,11 @@ public class OrderServiceImpl implements OrderService {
 
 		// Create and save order
 		Orders order = new Orders();
-		order.setCustomerId(userProfileByName.getProfileId().intValue());
+		order.setCustomerId(userProfileByName.getProfileId());
 		order.setOrderDate(LocalDate.now());
 		order.setAmountPaid(totalPrice);
-		order.setAddress(UserProfileConverter.addressDTOToEntity(userProfileByName.getAddresses().get(0)));
+		if (userProfileByName.getAddresses() != null && userProfileByName.getAddresses().size() > 0)
+			order.setAddress(UserProfileConverter.addressDTOToEntity(userProfileByName.getAddresses().get(0)));
 		order.setOrderStatus("Pending");
 		orderRepository.save(order);
 

@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.eshopping.profile.converter.UserProfileConverter;
@@ -16,6 +15,7 @@ import com.eshopping.profile.entity.UserProfile;
 import com.eshopping.profile.service.UserService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -27,7 +27,7 @@ public class ProfileController {
 
 	@Operation(summary = "Add a new user profile")
 	@PostMapping
-	public ResponseEntity<UserProfileDTO> addUserProfile(@RequestBody UserProfile userProfile) {
+	public ResponseEntity<UserProfileDTO> addUserProfile(@Valid @RequestBody UserProfile userProfile) {
 		UserProfileDTO userProfileDTO = UserProfileConverter.entityToDTO(userProfile); // Convert entity to DTO
 		UserProfileDTO createdProfile = userService.addUserProfile(userProfileDTO);
 		return ResponseEntity.ok(createdProfile);
@@ -47,9 +47,9 @@ public class ProfileController {
 		return ResponseEntity.ok(userProfile);
 	}
 
-	@Operation(summary = "Get a user profile by first and last name")
+	@Operation(summary = "Get a user profile by first name")
 	@GetMapping("/name")
-	public ResponseEntity<UserProfileDTO> getUserProfileByName(@RequestParam String firstName) {
+	public ResponseEntity<UserProfileDTO> getUserProfileByName(@PathVariable String firstName) {
 		UserProfileDTO userProfile = userService.getUserProfileByName(firstName);
 		return ResponseEntity.ok(userProfile);
 	}

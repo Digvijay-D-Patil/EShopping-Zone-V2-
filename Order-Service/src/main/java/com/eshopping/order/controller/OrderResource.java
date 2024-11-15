@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.eshopping.cart.dto.CartDTO;
 import com.eshopping.order.dto.OrderDTO;
 import com.eshopping.order.entity.Orders;
 import com.eshopping.order.service.OrderService;
@@ -30,7 +29,7 @@ public class OrderResource {
 
 	@PostMapping("/placeOrder")
 	@Operation(summary = "Place a new order based on cart details and user name")
-	public ResponseEntity<OrderDTO> placeOrder(@Valid @RequestBody CartDTO cart, @RequestParam String name) {
+	public ResponseEntity<OrderDTO> placeOrder(@Valid @RequestBody OrderDTO cart, @RequestParam String name) {
 		OrderDTO order = orderService.placeOrder(cart, name);
 		return ResponseEntity.ok(order);
 	}
